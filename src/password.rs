@@ -1,11 +1,12 @@
 use crate::error::TypeError;
 use derive_more::Display;
 use regex::Regex;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialEq, Display)]
-pub struct Password(String);
+#[derive(Debug, PartialEq, Display, Serialize, Deserialize)]
+pub struct RawPassword(String);
 
-impl Password {
+impl RawPassword {
     pub fn parse_weak(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         if password_str.len() >= 8 {
@@ -60,54 +61,54 @@ mod tests {
     #[test]
     fn test_parse_weak() {
         assert_eq!(
-            Password::parse_weak("short".to_string()),
+            RawPassword::parse_weak("short".to_string()),
             Err(TypeError::ParseError(String::from(
                 "Weak password: must be at least 8 characters long"
             )))
         );
         assert_eq!(
-            Password::parse_weak("validpass".to_string()),
-            Ok(Password("validpass".to_string()))
+            RawPassword::parse_weak("validpass".to_string()),
+            Ok(RawPassword("validpass".to_string()))
         );
     }
 
     #[test]
     fn test_parse_medium() {
         assert_eq!(
-            Password::parse_medium("short".to_string()),
+            RawPassword::parse_medium("short".to_string()),
             Err(TypeError::ParseError(String::from("Medium password: must be at least 8 characters long and contain both letters and digits")))
         );
         assert_eq!(
-            Password::parse_medium("noDigits".to_string()),
+            RawPassword::parse_medium("noDigits".to_string()),
             Err(TypeError::ParseError(String::from("Medium password: must be at least 8 characters long and contain both letters and digits")))
         );
         assert_eq!(
-            Password::parse_medium("valid123".to_string()),
-            Ok(Password("valid123".to_string()))
+            RawPassword::parse_medium("valid123".to_string()),
+            Ok(RawPassword("valid123".to_string()))
         );
     }
 
     #[test]
     fn test_parse_strict() {
         assert_eq!(
-            Password::parse_strict("short".to_string()),
+            RawPassword::parse_strict("short".to_string()),
             Err(TypeError::ParseError(String::from("Strict password: must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters")))
         );
         assert_eq!(
-            Password::parse_strict("NoDigits!".to_string()),
+            RawPassword::parse_strict("NoDigits!".to_string()),
             Err(TypeError::ParseError(String::from("Strict password: must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters")))
         );
         assert_eq!(
-            Password::parse_strict("noupper1!".to_string()),
+            RawPassword::parse_strict("noupper1!".to_string()),
             Err(TypeError::ParseError(String::from("Strict password: must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters")))
         );
         assert_eq!(
-            Password::parse_strict("VALID123".to_string()),
+            RawPassword::parse_strict("VALID123".to_string()),
             Err(TypeError::ParseError(String::from("Strict password: must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters")))
         );
         assert_eq!(
-            Password::parse_strict("Valid123!".to_string()),
-            Ok(Password("Valid123!".to_string()))
+            RawPassword::parse_strict("Valid123!".to_string()),
+            Ok(RawPassword("Valid123!".to_string()))
         );
     }
 }

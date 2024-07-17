@@ -1,7 +1,25 @@
-use derive_more::Display;
+use core::fmt;
+use std::error;
 
-#[derive(Debug, Display, PartialEq)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum TypeError {
-    #[display(fmt = "{}", _0)]
     ParseError(String),
+}
+
+impl fmt::Display for TypeError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            TypeError::ParseError(msg) => write!(f, "{}", msg),
+        }
+    }
+}
+
+impl error::Error for TypeError {
+    fn description(&self) -> &str {
+        match self {
+            &TypeError::ParseError(_) => "parse error, invalid input!", // TODO! Better Error Description
+        }
+    }
 }
