@@ -1,14 +1,10 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod country_code;
+mod email;
+pub mod error;
+mod password;
+mod phone;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub use country_code::CountryCode;
+pub use email::Email;
+pub use password::Password;
+pub use phone::PhoneNumber;
