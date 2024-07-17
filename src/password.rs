@@ -3,10 +3,16 @@ use derive_more::Display;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 
+/// ### RawPassword : Parse `impl ToString` Into a Valid Password
+// TODO! Better docs
+// #region : --- RawPassword
 #[derive(Debug, PartialEq, Display, Serialize, Deserialize)]
 pub struct RawPassword(String);
 
+// RawPassword Constructor
 impl RawPassword {
+    /// #### Parse Weak
+    /// TODO!: Better docs
     pub fn parse_weak(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         if password_str.len() >= 8 {
@@ -18,6 +24,8 @@ impl RawPassword {
         }
     }
 
+    /// #### Parse Medium
+    /// TODO!: Better docs
     pub fn parse_medium(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         let re_digit = Regex::new(r"\d").unwrap();
@@ -32,6 +40,8 @@ impl RawPassword {
         }
     }
 
+    /// #### Parse Strict
+    /// TODO!: Better docs
     pub fn parse_strict(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         let re_upper = Regex::new(r"[A-Z]").unwrap();
@@ -50,6 +60,20 @@ impl RawPassword {
         }
     }
 }
+
+// #endregion : --- RawPassword
+
+// region : --- HashedPassword
+
+pub struct HashedPassword();
+
+impl HashedPassword {
+    pub fn verify() -> bool {
+        todo!() //TODO! verify password
+    }
+}
+
+// endregion : --- HashedPassword
 
 /// ======================================================================
 /// ========================= Unit Test
