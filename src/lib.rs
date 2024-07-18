@@ -3,7 +3,7 @@
 //! # Example
 //!
 //! ```
-//! use your_crate_name::{Email, PhoneNumber, RawPassword, CountryCode};
+//! use custom_type::{Email, PhoneNumber, RawPassword, CountryCode};
 //!
 //! let email = Email::parse("example@example.com").unwrap();
 //! println!("{}", email);
