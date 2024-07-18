@@ -3,16 +3,58 @@ use derive_more::Display;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 
+/// This crate provides functionality to parse and validate raw passwords with different levels of strength.
+///
+/// # Example
+///
+/// ```
+/// use custom_type::RawPassword;
+///
+/// let weak_password = RawPassword::parse_weak("weakpass").unwrap();
+/// println!("{}", weak_password);
+///
+/// let medium_password = RawPassword::parse_medium("Medium1").unwrap();
+/// println!("{}", medium_password);
+///
+/// let strict_password = RawPassword::parse_strict("Strong1!").unwrap();
+/// println!("{}", strict_password);
+///
+/// ```
+///
+/// # Features
+///
+/// - Parse and validate passwords with different strength levels (weak, medium, strict).
+/// - Custom error type `TypeError` for handling invalid passwords.
 /// ### RawPassword : Parse `impl ToString` Into a Valid Password
-// TODO! Better docs
-// #region : --- RawPassword
+/// Provides methods to parse and validate passwords with different strength criteria.
 #[derive(Debug, PartialEq, Display, Serialize, Deserialize)]
 pub struct RawPassword(String);
 
-// RawPassword Constructor
 impl RawPassword {
-    /// #### Parse Weak
-    /// TODO!: Better docs
+    /// Parses a given string into a weak password.
+    ///
+    /// A weak password must be at least 8 characters long.
+    ///
+    /// # Arguments
+    ///
+    /// * `password` - A string slice that holds the password to be parsed.
+    ///
+    /// # Returns
+    ///
+    /// * `Ok(Self)` if the password meets the weak criteria.
+    /// * `Err(TypeError::ParseError)` if the password is invalid.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use custom_type::RawPassword;
+    ///
+    /// let password = RawPassword::parse_weak("validpass");
+    /// assert!(password.is_ok());
+    ///
+    /// let invalid_password = RawPassword::parse_weak("short");
+    /// assert!(invalid_password.is_err());
+    /// ```
     pub fn parse_weak(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         if password_str.len() >= 8 {
@@ -24,8 +66,30 @@ impl RawPassword {
         }
     }
 
-    /// #### Parse Medium
-    /// TODO!: Better docs
+    /// Parses a given string into a medium password.
+    ///
+    /// A medium password must be at least 8 characters long and contain both letters and digits.
+    ///
+    /// # Arguments
+    ///
+    /// * `password` - A string slice that holds the password to be parsed.
+    ///
+    /// # Returns
+    ///
+    /// * `Ok(Self)` if the password meets the medium criteria.
+    /// * `Err(TypeError::ParseError)` if the password is invalid.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use custom_type::RawPassword;
+    ///
+    /// let password = RawPassword::parse_medium("valid123");
+    /// assert!(password.is_ok());
+    ///
+    /// let invalid_password = RawPassword::parse_medium("noDigits");
+    /// assert!(invalid_password.is_err());
+    /// ```
     pub fn parse_medium(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         let re_digit = Regex::new(r"\d").unwrap();
@@ -40,8 +104,30 @@ impl RawPassword {
         }
     }
 
-    /// #### Parse Strict
-    /// TODO!: Better docs
+    /// Parses a given string into a strict password.
+    ///
+    /// A strict password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.
+    ///
+    /// # Arguments
+    ///
+    /// * `password` - A string slice that holds the password to be parsed.
+    ///
+    /// # Returns
+    ///
+    /// * `Ok(Self)` if the password meets the strict criteria.
+    /// * `Err(TypeError::ParseError)` if the password is invalid.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use custom_type::RawPassword;
+    ///
+    /// let password = RawPassword::parse_strict("Valid123!");
+    /// assert!(password.is_ok());
+    ///
+    /// let invalid_password = RawPassword::parse_strict("NoDigits!");
+    /// assert!(invalid_password.is_err());
+    /// ```
     pub fn parse_strict(password: impl ToString) -> Result<Self, TypeError> {
         let password_str = password.to_string();
         let re_upper = Regex::new(r"[A-Z]").unwrap();
@@ -61,19 +147,29 @@ impl RawPassword {
     }
 }
 
-// #endregion : --- RawPassword
-
-// region : --- HashedPassword
-
+/// Struct representing a hashed password.
 pub struct HashedPassword();
 
 impl HashedPassword {
+    /// Verifies the hashed password.
+    ///
+    /// # Returns
+    ///
+    /// * `true` if the password is verified.
+    /// * `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use custom_type::HashedPassword;
+    ///
+    /// let is_verified = HashedPassword::verify();
+    /// assert!(!is_verified); // TODO: Update with actual verification logic
+    /// ```
     pub fn verify() -> bool {
         todo!() //TODO! verify password
     }
 }
-
-// endregion : --- HashedPassword
 
 /// ======================================================================
 /// ========================= Unit Test

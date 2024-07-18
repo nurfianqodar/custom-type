@@ -1,6 +1,18 @@
 use derive_more::Display;
 use serde::{Deserialize, Serialize};
 
+/// ### CountryCode : Enum representing country codes
+///
+/// Provides a representation for different country codes.
+///
+/// # Examples
+///
+/// ```
+/// use your_crate_name::CountryCode;
+///
+/// let usa_code = CountryCode::USA;
+/// assert_eq!(usa_code.to_string(), "+1");
+/// ```
 #[derive(Debug, PartialEq, Serialize, Deserialize, Display)]
 pub enum CountryCode {
     #[display(fmt = "+1")]

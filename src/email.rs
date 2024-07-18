@@ -3,6 +3,22 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
+/// This crate provides a simple and efficient way to parse and validate email addresses.
+///
+/// # Example
+///
+/// ```
+/// use custom_type::Email;
+///
+/// let email = Email::parse("example@example.com").unwrap();
+/// println!("{}", email);
+/// ```
+///
+/// # Features
+///
+/// - Parse and validate email addresses using a regular expression.
+/// - Normalize email addresses to lowercase.
+/// - Custom error type for handling invalid email addresses.
 /// ### Parse String To Valid Email
 /// Call the `parse()` method to parse `impl ToString` into a valid email.
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -15,6 +31,28 @@ impl fmt::Display for Email {
 }
 
 impl Email {
+    /// Parses a given string into a valid email address.
+    ///
+    /// # Arguments
+    ///
+    /// * `email` - A string slice that holds the email address to be parsed.
+    ///
+    /// # Returns
+    ///
+    /// * `Ok(Self)` if the email is valid.
+    /// * `Err(TypeError::ParseError)` if the email is invalid.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use custom_type::Email;
+    ///
+    /// let email = Email::parse("example@example.com");
+    /// assert!(email.is_ok());
+    ///
+    /// let invalid_email = Email::parse("invalid-email");
+    /// assert!(invalid_email.is_err());
+    /// ```
     pub fn parse(email: impl ToString) -> Result<Self, TypeError> {
         // Normalize email
         let email = email.to_string().to_lowercase();
