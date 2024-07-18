@@ -11,15 +11,20 @@ use serde::{Deserialize, Serialize};
 /// use custom_type::RawPassword;
 ///
 /// let weak_password = RawPassword::parse_weak("weakpass").unwrap();
-/// println!("{}", weak_password);
+/// println!("Weak Password: {}", weak_password);
 ///
-/// let medium_password = RawPassword::parse_medium("Medium1").unwrap();
-/// println!("{}", medium_password);
+/// let medium_password = RawPassword::parse_medium("Medium123").unwrap();
+/// println!("Medium Password: {}", medium_password);
 ///
-/// let strict_password = RawPassword::parse_strict("Strong1!").unwrap();
-/// println!("{}", strict_password);
-///
+/// let strict_password = RawPassword::parse_strict("Strong1!23").unwrap();
+/// println!("Strong Password: {}", strict_password);
 /// ```
+///
+/// - `parse_weak`: Parses a password and ensures it is at least 8 characters long.
+/// - `parse_medium`: Parses a password and ensures it is at least 8 characters long, contains both letters and digits.
+/// - `parse_strict`: Parses a password and ensures it is at least 8 characters long, contains uppercase, lowercase, digits, and special characters.
+///
+/// Each method returns a `Result<RawPassword, TypeError>` where `TypeError` indicates a parsing error if the password does not meet the criteria.
 ///
 /// # Features
 ///

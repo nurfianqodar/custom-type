@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 /// # Examples
 ///
 /// ```
-/// use your_crate_name::CountryCode;
+/// use custom_type::CountryCode;
 ///
 /// let usa_code = CountryCode::USA;
 /// assert_eq!(usa_code.to_string(), "+1");

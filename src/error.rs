@@ -1,12 +1,12 @@
-use core::fmt;
 use serde::{Deserialize, Serialize};
+use std::fmt;
 
 /// This crate defines custom error types for handling different kinds of errors.
 ///
 /// # Example
 ///
 /// ```
-/// use custom_type::TypeError;
+/// use custom_type::error::TypeError;
 ///
 /// let error = TypeError::ParseError("Invalid input".to_string());
 /// println!("{}", error);

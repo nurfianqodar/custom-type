@@ -26,21 +26,10 @@ mod email;
 pub mod error;
 mod password;
 mod phone;
+mod url;
 
 pub use country_code::CountryCode;
 pub use email::Email;
 pub use password::RawPassword;
 pub use phone::PhoneNumber;
-
-/// ======================================================================
-/// ========================= Integrated Test
-/// ======================================================================
-#[cfg(test)]
-mod tests {
-
-    #[test]
-    fn test_integration() {
-        todo!()
-        // TODO!
-    }
-}
+pub use url::Url;
