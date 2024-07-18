@@ -147,30 +147,6 @@ impl RawPassword {
     }
 }
 
-/// Struct representing a hashed password.
-pub struct HashedPassword();
-
-impl HashedPassword {
-    /// Verifies the hashed password.
-    ///
-    /// # Returns
-    ///
-    /// * `true` if the password is verified.
-    /// * `false` otherwise.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// use custom_type::HashedPassword;
-    ///
-    /// let is_verified = HashedPassword::verify();
-    /// assert!(!is_verified); // TODO: Update with actual verification logic
-    /// ```
-    pub fn verify() -> bool {
-        todo!() //TODO! verify password
-    }
-}
-
 /// ======================================================================
 /// ========================= Unit Test
 /// ======================================================================

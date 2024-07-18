@@ -29,7 +29,7 @@ mod phone;
 
 pub use country_code::CountryCode;
 pub use email::Email;
-pub use password::{HashedPassword, RawPassword};
+pub use password::RawPassword;
 pub use phone::PhoneNumber;
 
 /// ======================================================================
