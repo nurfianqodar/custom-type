@@ -1,6 +1,6 @@
 [package]
 name = "custom-type"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "This crate provides utilities for parsing and validating various types of data such as emails, passwords, and phone numbers with country codes."
 license = "MIT"
