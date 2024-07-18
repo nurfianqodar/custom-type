@@ -2,6 +2,9 @@
 name = "custom-type"
 version = "0.1.0"
 edition = "2021"
+description = "This crate provides utilities for parsing and validating various types of data such as emails, passwords, and phone numbers with country codes."
+license = "MIT"
+keywords = ["custom-type", "parser", "validation"]
 
 [dependencies]
 derive_more = "0.99.18"
