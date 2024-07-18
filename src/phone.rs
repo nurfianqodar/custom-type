@@ -1,5 +1,6 @@
 use derive_more::Display;
 use regex::Regex;
+use serde::{Deserialize, Serialize};
 
 use crate::{error::TypeError, CountryCode};
 
@@ -20,7 +21,7 @@ use crate::{error::TypeError, CountryCode};
 /// - Custom error type `TypeError` for handling invalid phone numbers.
 /// ### PhoneNumber : Parse `impl ToString` Into a Valid Phone Number
 /// Provides a method to parse and validate phone numbers with specified country codes.
-#[derive(Debug, PartialEq, Display)]
+#[derive(Debug, PartialEq, Display, Serialize, Deserialize)]
 pub struct PhoneNumber(String);
 
 impl PhoneNumber {
